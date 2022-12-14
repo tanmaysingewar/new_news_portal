@@ -104,7 +104,7 @@ function admin() {
                                             <p>{data.date}</p>
                                         </td>
                                         <td>
-                                            <p>{data.category}</p>
+                                            <p>{data.catagory}</p>
                                         </td>
                                         <td>
                                             <p>{data.name}</p>
@@ -208,7 +208,7 @@ function admin() {
                         />
                 </div>
                 <div className={styles.button} onClick={() => handleAdvertisementSubmit()}>
-                <p>Add Marquee</p>
+                <p>Add Advertisement</p>
                 </div>
         </div>
             </div>

@@ -188,3 +188,18 @@ export const getPostByCategory = (catagory) =>{
   })
   .catch((e) => console.log(e))
 }
+
+export const sendNotification = (data) =>{
+  return fetch(`http://localhost:8080/sendNotification`,{ // calling route 
+    method: "POST", // defining method to request
+    headers:{
+        Accept: "application/json",
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data) // data which is to be send to server
+  })
+  .then(res =>{
+    return res.json()
+  })
+  .catch((e) => console.log(e))
+}

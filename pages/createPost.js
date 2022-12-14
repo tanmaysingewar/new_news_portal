@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import React,{useState,useEffect} from 'react'
 import Script from 'next/script'
-import { createPost } from '../helper/fetchData'
+import { createPost, sendNotification } from '../helper/fetchData'
 import { useRouter } from 'next/router';
 import { isAuthincated } from '../helper/auth'
 
@@ -26,6 +26,7 @@ export default function createNews() {
     createPost({data})
     .then(res => {
       console.log(res);
+      sendNotification(res.post)
       if(res.success){
         return router.push({
           pathname: '/',

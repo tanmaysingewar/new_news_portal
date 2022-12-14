@@ -9,6 +9,9 @@ import Marquee from "react-fast-marquee";
 import SidePost from '../components/SidePost';
 import MainPost from '../components/MainPost';
 import dateFormat, { masks } from "dateformat";
+import {io} from 'socket.io-client'
+import Push from 'push.js';
+import Notiflix from 'notiflix';
 
 export default function Home() {
 
@@ -22,6 +25,8 @@ export default function Home() {
   const [DATASports, setDATASports] = useState([])
   const [DATAEducation, setDATAEducation] = useState([])
 
+  const [time, setTime] = React.useState('fetching')
+
   const [marquee, setmarquee] = useState("")
   const [advertisement, setAdvertisement] = useState("")
   const [username, setUsername] = useState('')
@@ -34,8 +39,22 @@ export default function Home() {
     if (!isAuthincated()) {
       router.push('/login')
     }
-    setUsername(`${isAuthincated().user.firstName} ${isAuthincated().user.lastName}`)
+    const socket = io('http://localhost:8000', { transports: ['websocket']} )
+    socket.on('connect', ()=>console.log(socket.id))
+    socket.on('connect_error', ()=>{
+      setTimeout(()=>socket.connect(),8000)
+    })
+  //  socket.on('time', (data)=>console.log(data))
 
+   socket.on('time', (data)=>Push.create(`New Post Posted`,{
+     body: `${data}`,
+   }))
+
+
+
+   socket.on('disconnect',()=>setTime('server disconnected'))
+
+    setUsername(`${isAuthincated().user.firstName} ${isAuthincated().user.lastName}`)
 
     getMarquee().then(res => {
       console.log(res)
@@ -117,6 +136,8 @@ export default function Home() {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Lora:ital,wght@1,500&family=Pacifico&family=Zilla+Slab:wght@300&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="dist/notiflix-3.2.5.min.css" />
+    <script src="dist/notiflix-3.2.5.min.js"></script>
   </Head>
     <div className={styles.container} >
       <table style={{width : "100vw"}}>

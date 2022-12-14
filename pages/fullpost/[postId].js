@@ -8,7 +8,7 @@ import Image from 'next/image';
 import Head from 'next/head';
 
 
-function fullPage({post}) {
+function fullPage({post}) { 
 
   const [isSameUser, setisSameUser] = useState(false);
 
@@ -76,6 +76,7 @@ function fullPage({post}) {
           <div style={{margin : 10}}>
               <p style={{fontFamily : "'Lora', serif", fontSize : 32,lineHeight: 0.9, textAlign : "left"}} >{postData.title}</p>
               <p style={{fontFamily : "'Pacifico', cursive", fontSize : 12,lineHeight: 0.9, textAlign : "left",marginTop : -5, paddingTop : 0}}>{`by ${postData.name}`}</p>
+              <p style={{fontFamily : "'Lora', serif", fontSize : 16,lineHeight: 0.9, textAlign : "left",marginTop : -5, paddingTop : 0}}>{`${postData.catagory}`}</p>
               <p style={{fontFamily : "'Lora', serif", fontSize : 14,lineHeight: 0, textAlign : "left", marginTop : 10, paddingBottom : 5}}>{postData.date} {isSameUser ? <img src={deleteIconURL} style={{width : 20, height : 20, borderRadius : 50, marginRight : 10, marginTop : -10}} onClick={() => onDelete()}/> : <span> </span>}</p>
              {/* <img className={styles.postImages} src={postData.image} height={400} width={800}  /> */}
              <p style={{textAlign : "justify", fontFamily : "'Lora', serif"}}>{postData.news}</p>
