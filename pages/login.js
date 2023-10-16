@@ -6,9 +6,11 @@ import Image from 'next/image'
 import Script from 'next/script'
 
 const login = () => {
-    const [data, setData] = useState('')
+    const [data, setData] = useState("")
     const router = useRouter();
     const [error, setError] = useState('')
+
+    console.log(data)
     
     const handleChang = (name) => event =>{
     setData({...data, [name]: event.target.value})

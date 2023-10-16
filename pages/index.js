@@ -54,11 +54,11 @@ export default function Home() {
 
    socket.on('disconnect',()=>setTime('server disconnected'))
 
-    setUsername(`${isAuthincated().user.firstName} ${isAuthincated().user.lastName}`)
+    setUsername(`${isAuthincated()?.user?.firstName} ${isAuthincated()?.user?.lastName}`)
 
     getMarquee().then(res => {
       console.log(res)
-      setmarquee(res.marquees[0].title)
+      setmarquee(res?.marquees[0]?.title)
     })
 
     getAdvertisement().then(res => {
